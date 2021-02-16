@@ -464,7 +464,7 @@ struct VertexAttribArrayDispatch : public VertexArrayState::ArrayDispatch
                 ext->glVertexAttribIPointer(static_cast<GLuint>(unit), new_array->getDataSize(), new_array->getDataType(), 0, ptr);
         }
         else
-        {
+        {//这个函数只是说明了buffer里面，数据是如何排列的，并跟shader里面的属性关联起来。
             ext->glVertexAttribPointer(static_cast<GLuint>(unit), new_array->getDataSize(), new_array->getDataType(), new_array->getNormalize(), 0, ptr);
         }
     }

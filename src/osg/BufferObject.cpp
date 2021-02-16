@@ -211,7 +211,7 @@ void GLBufferObject::compileBuffer()
     {
         _allocatedSize = _profile._size;
         OSG_INFO<<"    Allocating new glBufferData(), _allocatedSize="<<_allocatedSize<<std::endl;
-        _extensions->glBufferData(_profile._target, _profile._size, NULL, _profile._usage);
+        _extensions->glBufferData(_profile._target, _profile._size, NULL, _profile._usage);  //这里只分配了buffer的空间，没有拷贝数据
         compileAll = true;
     }
 
@@ -238,6 +238,7 @@ void GLBufferObject::compileBuffer()
             }
             else
             {
+				//拷贝数据
                 _extensions->glBufferSubData(_profile._target, (GLintptr)entry.offset, (GLsizeiptr)entry.dataSize, entry.dataSource->getDataPointer());
             }
         }
@@ -1275,7 +1276,7 @@ void BufferData::releaseGLObjects(State* state) const
 //
 VertexBufferObject::VertexBufferObject()
 {
-    setTarget(GL_ARRAY_BUFFER_ARB);
+    setTarget(GL_ARRAY_BUFFER_ARB);  //指定buffer的类型
     setUsage(GL_STATIC_DRAW_ARB);
 //    _usage = GL_DYNAMIC_DRAW_ARB;
 //    _usage = GL_STREAM_DRAW_ARB;
